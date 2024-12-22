@@ -6,7 +6,7 @@ ARG USER=user
 # Enviroment variables
 # ---
 ENV LANG=C.UTF-8 \
-    LC_ALL=C.UTF-8
+	LC_ALL=C.UTF-8
 ENV TZ Australia/Sydney
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
@@ -25,10 +25,10 @@ WORKDIR $HOME
 # ---
 # Install pyenv dependencies
 RUN apt-get update && \
-    apt-get install -y build-essential libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev curl llvm \
-    libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git python3-pip && \
-    apt-get clean
+	apt-get install -y build-essential libssl-dev zlib1g-dev \
+	libbz2-dev libreadline-dev libsqlite3-dev curl llvm \
+	libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev git python3-pip && \
+	apt-get clean
 
 RUN git clone --depth=1 https://github.com/pyenv/pyenv.git $HOME/.pyenv
 ENV PYENV_ROOT="${HOME}/.pyenv"
@@ -40,7 +40,7 @@ ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 RUN apt-get update && \
-    apt-get install -y nodejs
+	apt-get install -y nodejs
 
 # Get poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
@@ -48,8 +48,8 @@ ENV PATH="${PATH}:$HOME/.poetry/bin"
 ENV PATH="${PATH}:$HOME/.local/bin"
 
 RUN poetry config virtualenvs.create false
-    # && cd /usr/local \
-    # && poetry install --no-interaction --no-ansi
+# && cd /usr/local \
+# && poetry install --no-interaction --no-ansi
 
 ENV PATH="${PATH}:$HOME/.local/bin"
 
@@ -60,15 +60,10 @@ ENV PATH="${PATH}:${PYENV_ROOT}/versions/$PYTHON_VERSION/bin"
 # Install Quartz
 # ---
 RUN cd /usr/local \
-    && git clone https://github.com/jackyzha0/quartz.git \
-    && cd quartz \
-    && npm i
-    # && npx quartz create
+	&& git clone https://github.com/jackyzha0/quartz.git \
+	&& cd quartz \
+	&& npm i
+# && npx quartz create
 
-RUN cd /usr/local/quartz && \
-    git remote rm origin && \
-    git remote add origin git@github.com:hsteinshiromoto/zettelkasten.git
-
- 
 EXPOSE 8080
 
