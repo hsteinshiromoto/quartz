@@ -11,14 +11,13 @@ ENV TZ Australia/Sydney
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV HOME=/home/$USER
-ENV QUARTZ=/usr/local/quartz
+ENV WORKDIR=/home/$USER/workspace
+ENV QUARTZ=$HOME/quartz
 ENV PATH="${PATH}:$QUARTZ"
 
 
 # Create the "home" folder
-RUN mkdir -p $HOME
-COPY . $HOME
-WORKDIR $HOME
+RUN mkdir -p $WORKDIR
 
 # ---
 # Install pyenv
