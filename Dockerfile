@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:24.04
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=user
@@ -11,6 +11,9 @@ ENV TZ Australia/Sydney
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV HOME=/home/$USER
+ENV QUARTZ=/usr/local/quartz
+ENV PATH="${PATH}:$QUARTZ"
+
 
 # Create the "home" folder
 RUN mkdir -p $HOME
@@ -59,11 +62,9 @@ ENV PATH="${PATH}:${PYENV_ROOT}/versions/$PYTHON_VERSION/bin"
 # ---
 # Install Quartz
 # ---
-RUN cd /usr/local \
-	&& git clone https://github.com/jackyzha0/quartz.git \
-	&& cd quartz \
+RUN git clone https://github.com/jackyzha0/quartz.git $QUARTZ \
+	&& cd $QUARTZ \
 	&& npm i
 # && npx quartz create
 
 EXPOSE 8080
-
