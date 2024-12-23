@@ -14,7 +14,6 @@ PROJECT_PATH := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 GIT_REMOTE=$(shell basename $(shell git remote get-url origin))
 PROJECT_NAME=$(shell echo $(GIT_REMOTE:.git=))
 CURRENT_VERSION=$(shell git tag -l --sort=-creatordate | head -n 1 | cut -d "v" -f2-)
-QUARTZ_PATH=/usr/local/quartz
 
 DOCKER_REPOSITORY_USER=hsteinshiromoto
 DOCKER_REPOSITORY=ghcr.io
@@ -29,11 +28,6 @@ PYTHON_VERSION=313
 # Commands
 # ---
 
-## Update Symbolic Links
-# ln:
-# 	rm -rf ${QUARTZ_PATH}/content/* && \
-# 	ln -s /workspaces/zettelkasten/* ${QUARTZ_PATH}/content
-
 ## Build Docker app image
 image:
 	$(eval DOCKER_IMAGE_TAG=${DOCKER_IMAGE_NAME}:${DOCKER_TAG})
@@ -41,7 +35,6 @@ image:
 	@echo "Building docker image ${DOCKER_IMAGE_TAG}"
 	docker buildx build --build-arg BUILD_DATE=${BUILD_DATE} \
 				--build-arg DOCKER_PARENT_IMAGE=${DOCKER_PARENT_IMAGE} \
-				--build-arg PROJECT_NAME=${PROJECT_NAME} \
 				--build-arg PYTHON_VERSION=${PYTHON_VERSION} \
 				--platform linux/${HOST_ARCH} \
 				-t ${DOCKER_IMAGE_TAG} .
