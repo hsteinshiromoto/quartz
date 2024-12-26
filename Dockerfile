@@ -1,5 +1,6 @@
 FROM alpine:3.20 
 
+ARG USER=user
 # ---
 # Enviroment variables
 # ---
