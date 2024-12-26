@@ -47,5 +47,7 @@ RUN git clone https://github.com/jackyzha0/quartz.git $QUARTZ \
 	&& npm i
 # && npx quartz create
 
+COPY .github/workflows/deploy.yml $QUARTZ/.github/workflows/
+
 EXPOSE 8080
 CMD ["tail", "-f","/dev/null"]
