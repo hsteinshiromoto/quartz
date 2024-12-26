@@ -23,7 +23,7 @@ RUN mkdir -p $WORKDIR
 # ---
 # Instal Alpine Dependencies
 # ---
-RUN apk add --update bash git shadow xz
+RUN apk add --update bash curl git shadow xz
 
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
