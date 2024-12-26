@@ -9,8 +9,6 @@ ENV LANG=C.UTF-8 \
 	LC_ALL=C.UTF-8
 ENV TZ Australia/Sydney
 ENV USER=$USER
-SHELL ["/bin/bash", "-c"]
-ENV SHELL=/bin/bash
 ENV HOME=/home/$USER
 ENV WORKDIR=$HOME/workspace
 ENV QUARTZ=$HOME/quartz
@@ -27,7 +25,8 @@ RUN mkdir -p $WORKDIR
 # ---
 RUN apk add --update bash git shadow xz
 
-
+SHELL ["/bin/bash", "-c"]
+ENV SHELL=/bin/bash
 # ---
 # install nix package manager
 # ---
