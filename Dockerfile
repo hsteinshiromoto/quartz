@@ -1,5 +1,6 @@
 FROM alpine:3.20 
 
+ARG BUILD_DATE
 ARG USER=user
 # ---
 # Enviroment variables
@@ -7,6 +8,7 @@ ARG USER=user
 ENV LANG=C.UTF-8 \
 	LC_ALL=C.UTF-8
 ENV TZ Australia/Sydney
+ENV USER=$USER
 SHELL ["/bin/bash", "-c"]
 ENV SHELL=/bin/bash
 ENV HOME=/home/$USER
