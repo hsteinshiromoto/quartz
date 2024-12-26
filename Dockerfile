@@ -12,6 +12,7 @@ ENV USER=$USER
 ENV HOME=/home/$USER
 ENV WORKDIR=$HOME/workspace
 ENV QUARTZ=$HOME/quartz
+ENV PATH="/nix/var/nix/profiles/default/bin:$PATH"
 ENV PATH="${PATH}:${QUARTZ}"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
